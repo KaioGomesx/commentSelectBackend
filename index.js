@@ -1,7 +1,9 @@
 require("dotenv").config();
-const fetch = require("node-fetch");
 const express = require("express");
 const cors = require("cors");
+
+const commentHandle = require("./commentHandle");
+
 const app = express();
 
 app.use(cors());
@@ -13,27 +15,7 @@ app.get("/comments", async (req, res) => {
     res.json({ error: "no video id" }).status(400);
   }
 
-  const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${process.env.YOUTUBE_API_KEY}`;
-  try {
-    const getVideos = pageToken =>
-      fetch(
-        `${url}` + (pageToken ? `&pageToken=${pageToken}` : "")
-      ).then(response => response.json());
-
-    const allComments = [];
-    let page = await getVideos();
-    allComments.push(...page.items);
-
-    while (page.nextPageToken) {
-      page = await getVideos(page.nextPageToken);
-      allComments.push(...page.items);
-    }
-
-    res.json({ allComments });
-  } catch (error) {
-    console.log(error);
-    res.json({ error: "videoId is invalid" });
-  }
+  commentHandle(videoId);
 });
 
 app.listen(process.env.PORT, () => console.log(" => alright, server is up"));
