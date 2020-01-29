@@ -16,8 +16,13 @@ const commentHandle = async (res, videoId) => {
       page = await getVideos(page.nextPageToken);
       allComments.push(...page.items);
     }
-
-    res.json({ allComments });
+    res.json(
+      allComments.map(comments => ({
+        commentAuthor:
+          comments.snippet.topLevelComment.snippet.authorDisplayName,
+        commentText: comments.snippet.topLevelComment.snippet.textOriginal
+      }))
+    );
   } catch (error) {
     console.log(error);
     res.json({ error: "videoId is invalid" });
