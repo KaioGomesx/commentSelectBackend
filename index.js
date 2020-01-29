@@ -27,7 +27,8 @@ app.get("/comments", async (req, res) => {
     }
 
     res.json({ allComments });
-  } catch {
+  } catch (error) {
+    console.log(error);
     res.json({ error: "videoId is invalid" });
   }
 });
