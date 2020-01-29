@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-app.use(cors);
+app.use(cors());
 
 app.get("/comments", async (req, res) => {
   const { videoId } = req.query;
