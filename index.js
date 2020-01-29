@@ -15,7 +15,7 @@ app.get("/comments", async (req, res) => {
     res.json({ error: "no video id" }).status(400);
   }
 
-  commentHandle(videoId);
+  commentHandle(res, videoId);
 });
 
 app.listen(process.env.PORT, () => console.log(" => alright, server is up"));

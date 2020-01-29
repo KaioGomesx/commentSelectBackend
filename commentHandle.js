@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const commentHandle = async videoId => {
+const commentHandle = async (res, videoId) => {
   const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${process.env.YOUTUBE_API_KEY}`;
   try {
     const getVideos = pageToken =>
