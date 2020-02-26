@@ -7,9 +7,14 @@ const getVideos = async (url, pageToken = null) => {
     `${url}` + (pageToken ? `&pageToken=${pageToken}` : "")
   );
 
-  console.log({
-    nextPageToken: data.nextPageToken
-  });
+  return {
+    nextPageToken: data.nextPageToken,
+    comments: data.items.map(item => ({
+      commentId: item.id,
+      commentAuthor: item.snippet.topLevelComment.snippet.authorDisplayName,
+      commentText: item.snippet.topLevelComment.snippet.textOriginal
+    }))
+  };
 };
 
 const commentHandle = async (videoId, pageToken) => {
