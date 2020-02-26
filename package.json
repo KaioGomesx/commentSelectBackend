@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build && node build/index.js",
+    "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc"
   },
@@ -15,9 +15,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "hermes-http": "^1.4.1",
-    "typescript": "^3.8.2"
   },
   "devDependencies": {
+    "typescript": "^3.8.2",
     "nodemon": "^2.0.2",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0"
