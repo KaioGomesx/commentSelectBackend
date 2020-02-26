@@ -17,11 +17,13 @@ app.get("/comments", async (req, res) => {
 
   if (pageToken) {
     const response = await commentHandle(videoId, pageToken);
-    res.send(response);
+    res.json(response).status(200);
   }
 
-  const response = await commentHandle(videoId);
-  res.send(response);
+  if (!pageToken) {
+    const response = await commentHandle(videoId);
+    res.json(response).status(200);
+  }
 });
 
 app.listen(process.env.PORT, () => console.log(" => alright, server is up"));
