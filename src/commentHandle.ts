@@ -7,6 +7,7 @@ type Comment = {
   snippet: {
     topLevelComment: {
       snippet: {
+        authorProfileImageUrl: string;
         authorDisplayName: string;
         textOriginal: string;
       };
@@ -28,6 +29,8 @@ const getVideos = async (url: string, pageToken: string | null = null) => {
     nextPageToken: data.nextPageToken,
     comments: data.items.map((item: Comment) => ({
       commentId: item.id,
+      commentAuthorProfileImageUrl:
+        item.snippet.topLevelComment.snippet.authorProfileImageUrl,
       commentAuthor: item.snippet.topLevelComment.snippet.authorDisplayName,
       commentText: item.snippet.topLevelComment.snippet.textOriginal
     }))
